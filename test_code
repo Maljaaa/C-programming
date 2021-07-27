@@ -1,0 +1,1999 @@
+#include <iostream>
+using namespace std;
+
+// 1강
+/*
+// 현재 가진 돈으로 살 수 있는 캔디의 갯수와 남은 돈 계산
+int main() {
+	int money;
+	int candy_price;
+
+	cout << "현재 가지고 있는 돈 ";
+	cin >> money;
+	cout << "캔디의 가격 ";
+	cin >> candy_price;
+
+	int n_candies = money / candy_price;
+	cout << "최대로 살 수 있는 캔디의 개수 = " << n_candies << endl;
+
+	int charge = money % candy_price;
+	cout << "캔디 구입 후 남은 돈 = " << charge << endl;
+	
+	return 0;
+}
+*/
+
+/*
+// 화씨 온도를 섭씨 온도로
+int main() {
+	double f_temp;
+	double c_temp;
+
+	cout << "화씨 온도 : ";
+	cin >> f_temp;
+
+	// 화씨온도로 섭씨온도를 구하는 공식
+	c_temp = (5.0 / 9.0) * (f_temp - 32);
+
+	cout << "화씨 온도" << f_temp << "도는 섭씨 온도" << c_temp << "도 입니다." << endl;
+	return 0;
+}
+*/
+
+/*
+// 2개의 주사위를 던져서 주사위의 합을 표시
+#include <ctime>
+#include <cstdlib>
+int main() {
+
+	srand(time(NULL)); // seed값 생성
+	int dice1 = (rand() % 6) + 1;
+	int dice2 = (rand() % 6) + 1;
+
+	cout << "두 주사위 합 = " << dice1 + dice2 << endl;
+	return 0;
+}
+*/
+
+// 2강 제어구조와 배열 
+/*
+* 참 거짓 판단
+int main() {
+	bool b;
+	b = (1 == 2);
+
+	cout << boolalpha;
+	cout << b << endl;
+
+	return 0;
+}
+*/
+
+/*
+// 크기 비교
+int main() {
+	int x, y;
+
+	cout << "x값을 입력하세요 : ";
+	cin >> x;
+
+	cout << "y값을 입력하세요 : ";
+	cin >> y;
+
+	if (x > y) {
+		cout << "x가 y보다 크다." << endl;
+	}
+	else {
+		cout << "y가 x보다 크다." << endl;
+	}
+
+	return 0;
+}
+*/
+
+/*
+// 변수가 어린이, 청소년, 성인인지 판별
+int main() {
+	int age;
+	cout << "나이를 입력하세요 : ";
+	cin >> age;
+
+	if (age <= 12) {
+		cout << "어린이" << endl;
+	}
+	else if (age <= 19) {
+		cout << "청소년" << endl;
+	}
+	else {
+		cout << "어른" << endl;
+	}
+
+	return 0;
+}
+*/
+
+/*
+// 컴퓨터가 숨기고 있는 비밀 코드를 추측하는 게임, a~z사이의 문자
+int main() {
+	char secret_code = 'h';
+
+	cout << "비밀코드를 맞춰보세요 : ";
+	char code;
+	cin >> code;
+	if (code < secret_code)
+		cout << code << "뒤에 있음" << endl;
+	else if (code > secret_code)
+		cout << code << "앞에 있음" << endl;
+	else
+		cout << "딩동댕" << endl;
+
+	return 0;
+}
+*/
+
+/*
+// 3개의 정수를 받아서 가장 큰 수 찾기
+int main() {
+	int x, y, z, largest;
+
+	cout << "3개의 정수를 입력하세요 : ";
+	cin >> x >> y >> z;
+
+	if (x > y && x > z)
+		largest = x;
+	else if (y > x && y > z)
+		largest = y;
+	else
+		largest = z;
+
+	cout << "가장 큰 수는 " << largest << endl;
+
+	return 0;
+}
+*/
+
+/*
+// 카운트다운
+int main() {
+	int n = 10;
+	while (n > 0) {
+		cout << n << " ";
+		n--;
+	}
+	cout << "발사!" << endl;
+
+	return 0;
+}
+*/
+
+/*
+// 구구단 출력
+int main() {
+	int n;
+	int i = 1;
+
+	cout << "구구단 중에서 출력하고 시은 단을 입력하세요 : ";
+	cin >> n;
+
+	while (i <= 9) {
+		cout << n << " * " << i << " = " << n * i << endl;
+		i++;
+	}
+	return 0;
+}
+*/
+
+/*
+// "종료" 입력하기 전까지 입력을 그대로 출력
+#include <string>
+int main() {
+	
+	string str;
+	
+	do {
+		cout << "문자열을 입력하세요 : ";
+		getline(cin, str); // 한 줄의 텍스트를 받을 때
+		cout << "사용자의 입력 : " << str << endl;
+	} while (str != "종료");
+	
+	return 0;
+}
+*/
+
+/*
+// 1~10 정수를 더해 합을 구하기
+int main() {
+	int sum = 0;
+	for (int i = 1; i <= 10; i++) {
+		sum += i;
+	}
+
+	cout << "합 = " << sum << endl;
+	return 0;
+}
+*/
+
+/*
+// 팩토리얼 값 계산
+int main() {
+	long fact = 1;
+	int n;
+
+	cout << "정수를 입력하세요 : ";
+	cin >> n;
+
+	for (int i = 1; i <= n; i++) {
+		fact = fact * i;
+	}
+	cout << n << "!은" << fact << "입니다." << endl;
+
+	return 0;
+}
+*/
+
+/*
+// 영문자를 받아서 자음과 모음의 개수를 세는 프로그램
+int main() {
+	int vowel = 0, consonant = 0;
+	char ch;
+
+	cout << "영문자를 입력하고 컨트롤 -z를 치세요" << endl;
+	while (cin >> ch) {
+		switch (ch) {
+		case 'a' : case'i' :case 'e' : case 'o': case 'u':
+			vowel++;
+			break;
+		default :
+			consonant++;
+			break;
+		}
+	}
+	cout << "모음 : " << vowel << endl;
+	cout << "자음 : " << consonant << endl;
+}
+*/
+
+/*
+// 1~100사이 업다운 게임
+#include <ctime>
+int main() {
+	srand(time(NULL));
+
+	int answer = rand() % 100 + 1;
+	int guess;
+	int tries = 0;
+
+	do {
+		cout << "정답을 추측하여 보시오 : ";
+		cin >> guess;
+		tries++;
+
+		if (guess > answer) {
+			cout << "제시한 정수가 높습니다.\n";
+		}
+		if (guess < answer) {
+			cout << "제시한 정수가 낮습니다.\n";
+		}
+	} while (guess != answer);
+
+	cout << "딩동댕!(시도횟수 : " << tries << ")" << endl;
+
+	return 0;
+}
+*/
+
+/*
+// 산수 문제 자동 출제
+#include <cstdlib>
+int main() {
+	int i, ans;
+
+	cout << "산수 문제를 자동으로 출제합니다." << endl;
+
+	while (true) {
+		int x = rand() % 100;
+		int y = rand() % 100;
+		cout << x << " + " << y << " = ";
+		cin >> ans;
+		if (x + y == ans) {
+			cout << "Correct!" << endl;
+			break;
+		}
+		else
+			cout << "Wrong,,,," << endl;
+	}
+	return 0;
+}
+*/
+
+/*
+// 성적 입력 받아서 평균을 구하는 프로그램(배열 이용)
+int main() {
+	const int STUDENTS = 10; // 기호 상수 선언(변경 불가능)
+	int scores[STUDENTS];
+	int sum = 0;
+	int i, average;
+
+	for (i = 0; i < STUDENTS; i++) {
+		cout << "학생들의 성적을 입력하세요 : ";
+		cin >> scores[i];
+	}
+	for (i = 0; i < STUDENTS; i++)
+		sum += scores[i];
+
+	average = sum / STUDENTS;
+	cout << "평균은 " << average << endl;
+
+	return 0;
+}
+*/
+
+/*
+// 크기가 100인 배열을 1~100 사이의 난수로 채우고 최대값 찾기
+#include <cstdlib>
+
+int main() {
+	int list[10];
+	int max;
+
+	for (int& elem : list) {
+		elem = rand() % 100 + 1;
+		cout << elem << " ";
+	}
+	cout << endl;
+
+	max = list[0];
+	for (auto& elem : list) {
+		if (elem > max)
+			max = elem;
+	}
+	cout << "최댓값 : " << max << endl;
+
+	return 0;
+}
+*/
+
+/*
+// 구구단의 저장
+#define WIDTH 9
+#define HEIGHT 9
+int main() {
+	int table[HEIGHT][WIDTH];
+	int r, c;
+
+	for (r = 0; r < HEIGHT; r++)
+		for (c = 0; c < WIDTH; c++)
+			table[r][c] = (r + 1) * (c + 1);
+
+	for (r = 0; r < HEIGHT; r++) {
+		for (c = 0; c < WIDTH; c++) {
+			cout << table[r][c] << ", ";
+		}
+		cout << endl;
+	}
+}
+*/
+
+/*
+// Tic-Tac-Toc 게임 (2명의 경기자가 보드에 o,x 번갈아 놓기)
+int main() {
+	char board[3][3];
+	int x, y, k, i;
+
+	// 보드 초기화
+	for (x = 0; x < 3; x++)
+		for (y = 0; y < 3; y++)
+			board[x][y] = ' ';
+
+	for (k = 0; k < 9; k++) {
+		cout << "(x, y)좌표 : ";
+		cin >> x >> y;
+		board[x][y] = (k % 2 == 0) ? '  X' : '  O'; // 번갈아 가면서 넣기
+		// 보드 그리기
+		for (i = 0; i < 3; i++) {
+			cout << "---|---|---" << endl;
+			cout << board[i][0] << "  |" << board[i][1] << "  |" << board[i][2] << endl;
+		}
+		cout << "---|---|---" << endl;
+	}
+	return 0;
+}
+*/
+
+/*
+// 제곱 만들기
+int square(int n) {
+	return n * n;
+}
+
+int main() {
+	int n;
+	cout << "제곱할 정수를 입력하시오 : ";
+	cin >> n;
+
+	cout << square(n) << endl;
+	return 0;
+}
+*/
+
+/*
+// swap (별칭을 활용, call by reference)
+void swap(int& x, int& y) {
+	int temp;
+
+	temp = x;
+	x = y;
+	y = temp;
+}
+
+int main() {
+	int a = 100, b = 200;
+	cout << "a = " << a << " b = " << b << endl;
+	swap(a, b);
+	cout << "a = " << a << " b = " << b << endl;
+	return 0;
+}
+*/
+
+/*
+// overloading ex
+int square(int i) {
+	cout << "square(int)호출" << endl;
+	return i * i;
+}
+
+double square(double i) {
+	cout << "square(double)호출" << endl;
+	return i * i;
+}
+
+int main() {
+	cout << square(5) << endl;
+	cout << square(5.5) << endl;
+
+	return 0;
+}
+*/
+
+/*
+// 정수, 실수, 문자를 모두 출력할 수 있는 prin()함수를 overloading
+void print(int i) {
+	cout << "정수 출력 : " << i << endl;
+}
+
+void print(double i) {
+	cout << "실수 출력 : " << i << endl;
+}
+
+void print(char i) {
+	cout << "문자 출력 : " << i << endl;
+}
+
+int main() {
+	print(100);
+	print(3.14);
+	print('C');
+
+	return 0;
+}
+*/
+
+/*
+// default argument ex
+void display(char c = '*', int n = 10) {	// 아무것도 입력되지 않았을 떄 자동으로 입력되는 값 = default값
+	for (int i = 0; i < n; i++) {
+		cout << c;
+	}
+	cout << endl;
+}
+
+int main() {
+	cout << "아무런 인수가 전달되지 않는 경우 : \n";
+	display();
+
+	cout << "\n 첫 번째 인수만 전달되는 경우 : \n";
+	display('#');
+
+	cout << "\n 모든 인수가 전달되는 경우 : \n";
+	display('#', 5);
+
+	return 0;
+}
+*/
+
+/*
+// default argument ex2
+int sum(int a = 0, int b = 0, int c = 0, int d = 0) {
+	return a + b + c + d;
+}
+
+int main() {
+	cout << "sum(10, 15) = " << sum(10, 15) << endl;
+	cout << "sum(10, 15, 25) = " << sum(10, 15, 25) << endl;
+	cout << "sum(10, 15, 25, 30) = " << sum(10, 15, 25, 30) << endl;
+	
+	return 0;
+}
+*/
+
+/*
+// 이름과 주소 받아서 인사하는 프로그램
+#include <string>
+
+int main() {
+	string s1, addr;
+
+	cout << "이름을 입력하시오 : ";
+	cin >> s1;
+	cin.ignore(); // 엔터키 없애기 위해
+
+	cout << "주소를 입력하시오 : ";
+	getline(cin, addr);
+	cout << addr << "의 " << s1 << "씨 안녕하세요?" << endl;
+
+	return 0;
+}
+*/
+
+/*
+// "When in Rome, do as the Romans." 중에서 "Rome"이 몇 번째 위치에 있는지 계산하는 프로그램
+#include <string>
+
+int main() {
+	string s = "When in Rome, do as the Romans.";
+
+	int index = s.find("Rome"); // 공백 포함
+	cout << index << endl;
+
+	return 0;
+}
+*/
+
+/*
+// 주민등록번호 '-' 삭제하는 프로그램
+#include <string>
+
+int main() {
+	string s;
+	cout << "주민등록번호를 입력하시오 : ";
+	cin >> s;
+
+	cout << "-가 제거된 주민등록 번호 : ";
+	for (auto& c : s) {
+		if (c == '-')continue;
+		cout << c;
+	}
+	cout << endl;
+
+	return 0;
+}
+*/
+
+/*
+// Hamming distance(서로 다른 글자 갯수 계산) 
+#include <string>
+
+int main() {
+	string s1, s2;
+	int count = 0;
+
+	cout << "DNA1 : ";
+	cin >> s1;
+	cout << "DNA2 : ";
+	cin >> s2;
+
+	if (s1.length() != s2.length())
+		cout << "오류 : 길이가 다름" << endl;
+	else {
+		for (int i = 0; i < s1.length(); i++) {
+			if (s1[i] != s2[i]) {
+				count += 1;
+			}
+		}
+		cout << "해밍 거리는 " << count << endl;
+	}
+	return 0;
+}
+*/
+
+/*
+// Hang Man Game
+#include <string>
+
+int main() {
+	char ch;
+	string solution;
+	string list[] = { "the", "c++", "programming", "language" }; // 낼 수 있는 문제
+
+	int n = rand() % 4;
+	solution = list[n];
+
+	string guess(solution.length(), '_');
+
+	while (true) {
+		cout << guess << endl;
+		cout << "글자를 입력하시오 : ";
+		cin >> ch;
+		for (int i = 0; i < solution.length(); i++) {
+			if (ch == solution[i]) {
+				guess[i] = ch;
+			}
+		}
+		
+
+		if (solution == guess) {
+			cout << solution << endl;
+			cout << "성공하였습니다!";
+			break;
+		}
+	}
+	return 0;
+}
+*/
+
+// 4강 클래스와 객체
+
+/*
+// class ex
+class Circle {
+public :
+	int radius;
+	string color;
+
+	double calcArea() {
+		return 3.14 * radius * radius;
+	}
+};
+
+int main() {
+	Circle obj;
+
+	obj.radius = 100;
+	obj.color = "blue";
+
+	cout << "원의 면적 = " << obj.calcArea() << "\n";
+	return 0;
+}
+*/
+
+/*
+// 여러개의 객체 생성 예제
+class Circle {
+public:
+	int radius;
+	string color;
+
+	double calcArea() {
+		return 3.14 * radius * radius;
+	}
+};
+
+int main() {
+	Circle pizza1, pizza2;
+
+	pizza1.radius = 100;
+	pizza1.color = "yellow";
+	cout << "피자의 면적 = " << pizza1.calcArea() << endl;
+
+	pizza2.radius = 200;
+	pizza2.color = "white";
+	cout << "피자의 면적 = " << pizza2.calcArea() << endl;
+
+	return 0;
+}
+*/
+
+/*
+// Rectangle class로 객체를 생성하는 프로그램
+class Rectangle {
+public :
+	int width, height;
+	int calcArea() {
+		return width * height;
+	}
+};
+
+int main() {
+	Rectangle rect;
+
+	rect.width = 10;
+	rect.height = 20;
+
+	cout << rect.calcArea() << endl;
+
+	return 0;
+}
+*/
+
+/*
+// Car class
+class Car {
+public :
+	int speed;
+	int gear;
+	string color;
+
+	void speedUp() {
+		speed += 10;
+	}
+
+	void speedDown() {
+		speed -= 10;
+	}
+};
+
+int main() {
+	Car myCar;
+
+	myCar.speed = 100;
+	myCar.gear = 3;
+	myCar.color = "red";
+
+	myCar.speedUp();
+	myCar.speedDown();
+
+	return 0;
+}
+*/
+
+/*
+// Overloading ex
+class PrintData {
+public :
+	void print(int i) {
+		cout << i << endl;
+	}
+	void print(double f) {
+		cout << f << endl;
+	}
+	void print(string s = "No Data!") {
+		cout << s << endl;
+	}
+};
+
+int main() {
+	PrintData obj;
+
+	obj.print(1);
+	obj.print(3.14);
+	obj.print("C++14 is cool.");
+	obj.print();
+
+	return 0;
+}
+*/
+
+// 5강 생성자와 접근자 & 객체 배열
+/*
+// 생성자를 가진 Circle class
+class Circle {
+public :
+	// 멤버 변수
+	int radius;
+
+	// 멤버 함수
+	Circle();
+	Circle(int r);
+	double getArea();
+};
+
+Circle::Circle() {
+	radius = 1;
+	cout << radius << endl;
+}
+
+Circle::Circle(int r) {
+	radius = r;
+	cout << radius << endl;
+}
+
+double Circle::getArea() {
+	return 3.14 * radius * radius;
+}
+
+int main() {
+	Circle donut;
+	double area = donut.getArea();
+	cout << area << endl;
+
+	Circle pizza(30);
+	area = pizza.getArea();
+	cout << area << endl;
+}
+*/
+
+/*
+// 생성자에서 다른 생성자 호출(위임 생성자 만들기)
+class Circle {
+public : 
+	int radius;
+
+	Circle();
+	Circle(int r);
+	double getArea();
+};
+
+Circle::Circle():Circle(1){} // 위임 생성자
+
+Circle::Circle(int r) { // 타겟 생성자
+	radius = r;
+	cout << "반지름 " << radius << "인 원 생성" << endl;
+}
+
+double Circle::getArea() {
+	return 3.14 * radius * radius;
+}
+
+int main() {
+	Circle donut;
+	double area = donut.getArea();
+	cout << area << endl;
+
+	Circle pizza(30);
+	area = pizza.getArea();
+	cout << area << endl;
+}
+*/
+
+/*
+// Rectangle class 만들기
+class Rectangle {
+public:
+	int width, height;
+
+	Rectangle();
+	Rectangle(int w, int h);
+	Rectangle(int length);
+	bool isSquare();
+};
+
+Rectangle::Rectangle() {
+	width = height = 1;
+}
+
+Rectangle::Rectangle(int w, int h) {
+	width = w;
+	height = h;
+}
+
+Rectangle::Rectangle(int length) {
+	width = height = length;
+}
+
+bool Rectangle::isSquare(){
+	if (width == height) 
+		return true;
+
+	else
+		return false;
+}
+
+int main() {
+	Rectangle rect1;
+	Rectangle rect2(3, 5);
+	Rectangle rect3(3);
+
+	if (rect1.isSquare())
+		cout << "rect1은 정사각형이다." << endl;
+	if (rect2.isSquare())
+		cout << "rect2는 정사각형이다." << endl;
+	if (rect3.isSquare())
+		cout << "rect3은 정사각형이다." << endl;
+}
+*/
+
+/*
+// 사각형을 나타내는 Rectangle 클래스에 생성자를 추가해보자
+class Rectangle {
+	int width, height;
+public : 
+	Rectangle(int w, int h);
+	int calcArea();
+};
+
+Rectangle::Rectangle(int w, int h) {
+	width = w;
+	height = h;
+}
+
+int Rectangle::calcArea() {
+	return width * height;
+}
+*/
+
+/*
+// 클래스 작성 실습
+class Time {
+private :
+	int hour;
+	int minute;
+	int second;
+public :
+	Time() {
+		hour = 0;
+		minute = 0;
+		second = 0;
+	}
+
+	Time(int h, int m, int s) :hour{ h }, minute{ m }, second{ s }{}
+
+	void set_hour(int h) { 
+		if (h >= 24)
+			hour = 0;
+		else
+			hour = h; 
+	}
+	void set_minute(int m) { minute = m; }
+	int get_hour(){
+		return hour;
+	}
+	int get_minute() {
+		return minute;
+	}
+	int get_second() {
+		return second;
+	}
+
+	void inc_hour();
+	void print();
+};
+
+void Time::inc_hour() {
+	++hour;
+	if (hour > 23)
+		hour = 0;
+}
+
+void Time::print() {
+	cout << hour << ":" << minute << ":" << second << endl;
+}
+
+int main() {
+	Time t;
+	Time t2(1, 30, 30);
+	t.print();
+	t.inc_hour();
+	t.print();
+	t.set_hour(25);
+	t.set_minute(30);
+	t.print();
+	t2.print();
+	cout << "t time : " << t.get_hour() << endl;
+	
+}
+*/
+/*
+// 접근 제어 예제
+class Time {
+public :
+	Time(int h, int m);
+	void inc_hour();
+	void print();
+
+	int getHour() { return hour; }
+	int getMinute() { return minute; }
+	void setHour(int h) { hour = h; }
+	void setMinute(int m) { minute = m; }
+
+private :
+	int hour;
+	int minute;
+};
+
+void Time::print() {
+	cout << getHour() << ":" << getMinute() << endl;
+}
+
+int main() {
+	Time a{ 0, 0 };
+
+	a.setHour(19);
+	a.setMinute(26);
+
+	a.print();	// 프린트가 안됨 ㅠㅠ
+
+	return 0;
+}
+*/
+
+/*
+// 객체의 참조자가 함수의 매개 변수로 전달되는 경우 - 미디엄 피자 주문하면 라지로 변경해서 줌
+// call by reference 방식
+class Pizza {
+public :
+	Pizza(int s) :size{ s } {}
+	int size;
+};
+
+void makeDouble(Pizza& p) {	// Pizza p 로 하면 안됨 
+	p.size *= 2;
+}
+
+int main() {
+	Pizza pizza(10);
+	makeDouble(pizza);
+	cout << pizza.size << "인치 피자" << endl;
+	return 0;
+}
+*/
+
+/*
+// 함수가 객체를 반환하는 경우
+// call by value 방식
+class Pizza {
+public :
+	Pizza(int s) : size{ s } {} // 멤버 변수 초기화
+	int size;
+};
+
+Pizza createPizza() {
+	Pizza p(10);
+	return p;
+}
+
+int main() {
+	Pizza pizza = createPizza();
+	cout << pizza.size << "인치 피자" << endl;
+
+	return 0;
+}
+*/
+
+/*
+// Circle 클래스의 배열 선언 및 활용
+class Circle {
+	int radius;
+public : 
+	Circle() { radius = 1; }
+	Circle(int r) { radius = r; }
+	void setRadius(int r) { radius = r; }
+	double getArea();
+};
+
+double Circle::getArea() {
+	return 3.14 * radius * radius;
+}
+
+int main() {
+	Circle circleArray[3];
+
+	circleArray[0].setRadius(10);
+	circleArray[1].setRadius(20);
+	circleArray[2].setRadius(30);
+
+	for (int i = 0; i < 3; i++) {
+		cout << "Circle " << i << "의 면적은 " << circleArray[i].getArea() << endl;
+	} 
+
+}
+*/
+
+/*
+// 객체 배열 초기화
+class Circle {
+	int radius;
+public : 
+	Circle(int r = 1) { radius = r; }
+	void setRadius(int r) { radius = r; }
+	double getArea();
+};
+
+double Circle::getArea() {
+	return 3.14 * radius * radius;
+}
+
+int main() {
+	Circle circleArray[3] = { Circle(10), Circle(20), Circle() };
+
+	for (int i = 0; i < 3; i++) {
+		cout << "Circle " << i << "의 면적은 " << circleArray[i].getArea() << endl;
+	} 
+}
+*/
+
+/*
+// 2차원 배열 선언 및 활용
+class Circle {
+	int radius;
+public:
+	Circle(int r = 1) { radius = r; }
+	void setRadius(int r) { radius = r; }
+	double getArea();
+};
+
+double Circle::getArea() {
+	return 3.14 * radius * radius;
+}
+
+int main() {
+	Circle circles[2][3] = { {Circle(), Circle(2), Circle(3)}, {Circle(4), Circle(5), Circle(6)} }; // 초기화
+
+	for (int i = 0; i < 2; i++) 
+		for (int j = 0; j < 3; j++) {
+			cout << "Circle [" << i << ", " << j << "]의 면적은 ";
+			cout << circles[i][j].getArea() << endl;
+		}
+}
+*/
+
+/*
+// 초기화 예제
+class Circle {
+public :
+	int x, y;
+	int radius;
+	Circle(int x = 0, int y = 0, int r = 0) : x{ x }, y{ y }, radius{ r }{}
+	void print() {
+		cout << "반지름 " << radius << " @(" << x << ", " << y << ")" << endl;
+	}
+};
+
+int main() {
+	Circle objArray[10];
+
+	// 범위 기반 loop
+	for (Circle& c : objArray) {
+		c.x = rand() % 500;
+		c.y = rand() % 300;
+		c.radius = rand() % 100;
+	}
+
+	for (Circle c : objArray)
+		c.print();
+
+	return 0;
+}
+*/
+
+/*
+// 여러 권의 책을 저장할 수 있는 객체 배열 books를 생성
+class Book {
+	string title;
+	int price;
+public :
+	Book(string name = "", int price = 0) : title{name}, price{price}{}
+	void print() {
+		cout << "제목 : " << title << ",         가격 : " << price << endl;
+	}
+};
+
+int main() {
+	Book books[2] = { Book("어서와 C++", 25000), Book("어서와 C", 22000) };
+
+	cout << "소장하고 있는 책 정보 " << endl;
+	cout << "===========================" << endl;
+	for (Book& b : books)
+		b.print();
+	cout << "===========================" << endl;
+
+	return 0;
+}
+*/
+
+/*
+// 벡터의 사용 1
+#include <vector>
+int main() {
+	vector<int> fibonacci{ 0, 1, 1, 2, 3, 5, 8, 13, 21 ,34, 55, 89 };
+
+	for (int& number : fibonacci)
+		cout << number << " ";
+
+	cout << endl;
+	return 0;
+}
+*/
+
+/*
+// 벡터의 사용 2
+#include <vector>
+int main() {
+	vector<int> v1;
+
+	v1.push_back(10);
+	v1.push_back(20);
+	v1.push_back(30);
+	v1.push_back(40);
+	v1.push_back(50);
+
+	cout << "v1 = ";
+	for (int& e : v1) {
+		cout << e << " ";
+	}
+
+	cout << endl;
+	return 0;
+}
+*/
+
+/*
+// 벡터의 사용 3
+#include <vector>
+int main() {
+	vector<int> v;
+	for (int i = 0; i < 10; ++i) {
+		v.push_back(i);
+	}
+
+	cout << "현재의 v = ";
+	for (int& e : v) {
+		cout << e << " ";
+	}
+	cout << endl;
+
+	cout << "삭제 요소 = ";
+	while (v.empty() != true) {
+		cout << v.back() << " ";
+		v.pop_back();
+	}
+	cout << endl;
+}
+*/
+
+/*
+// 벡터의 연산자
+#include <vector>
+
+int main() {
+	vector<int> v1{ 1, 2, 3, 4, 5 };
+	vector<int> v2(v1);
+
+	if (v1 == v2) {
+		cout << "일치함" << endl;
+	}
+
+	return 0;
+}
+*/
+
+/*
+// 벡터에 문자열 저장
+#include <vector>
+#include <string>
+
+int main() {
+	vector<string> vec;
+
+	vec.push_back("milk");
+	vec.push_back("bread");
+	vec.push_back("butter");
+	for (string e : vec)
+		cout << " " << e;
+
+	cout << endl;
+
+	return 0;
+}
+*/
+
+/*
+// 벡터에 Circle 객체를 저장
+#include <vector>
+
+class Circle {
+public:
+	int x, y;
+	int radius;
+	Circle(int x = 0, int y = 0, int r = 0) : x{ x }, y{ y }, radius{ r }{}
+	void print() {
+		cout << "반지름 " << radius << " @(" << x << ", " << y << ")" << endl;
+	}
+};
+
+int main() {
+	vector<Circle> objArray;
+
+	for (int i = 0; i < 10; i++) {
+		Circle obj{ rand() % 300, rand() % 300, rand() % 100 };
+		objArray.push_back(obj);
+	}
+	for (Circle c : objArray)
+		c.print();
+
+	return 0;
+}
+*/
+
+/*
+// 벡터와 알고리즘
+#include <algorithm>
+#include <vector>
+#include <string>
+
+class Person {
+	string name;
+	int age;
+public :
+	Person(string n, int a) {
+		name = n;
+		age = a;
+	}
+	string get_name() { return name; }
+	int get_age() { return age; }
+	void print() {
+		cout << name << " " << age << endl;
+	}
+};
+
+bool compare(Person& p, Person& q) {
+	return p.get_age() < q.get_age(); // < 오름차순(점점 올라가), > 내림차순(점점 내려가)
+}
+
+int main() {
+	vector<Person> list;
+
+	list.push_back(Person("Kim", 30));
+	list.push_back(Person("Park", 22));
+	list.push_back(Person("Lee", 26));
+
+	sort(list.begin(), list.end(), compare); // STL이고 sort(시작, 끝, 함수);
+
+	for (auto& e : list) {
+		e.print();
+	}
+
+	return 0;
+}
+*/
+
+/*
+// 성적 평균 계산하기!! 단, 학생이 몇 명인지 알 수 없다 -> 벡터 사용
+#include <vector>
+
+int main() {
+	vector<int>scores;
+	int i, sum = 0;
+
+	while (true) {
+		int score;
+		cout << "입력하시오 ( 종료는 -1 ) : ";
+		cin >> score;
+		if (score == 1) break; // 왜 못나오지..?
+		scores.push_back(score);
+	}
+	for (auto& value : scores)
+		sum += value;
+
+	double avg = (double)sum / scores.size();
+	cout << "평균 = " << avg << endl;
+
+	return 0;
+}
+*/
+
+/*
+// 영화정보 저장
+#include <string>
+#include <vector>
+
+class Movie {
+	string title;
+	double rating;
+public :
+	Movie(string t = "", double r = 0.0) { title = t, rating = r; }
+	void print_movie() {
+		cout << title << " : " << rating << endl;
+	}
+};
+
+int main() {
+	vector<Movie> movies;
+
+	movies.push_back(Movie("tiinic", 9.9));
+	movies.push_back(Movie("asdfdsa", 9.8));
+	movies.push_back(Movie("gkjg", 9.7));
+
+	for (auto& e : movies)
+		e.print_movie();
+
+	return 0;
+}
+*/
+
+/*
+// array ex 
+// Array 클래스는 vector처럼 동적으로 크기를 변경하는 기능은 없다.
+// size(), fill() - 동일한 값으로 채움, empty(), at() - 배열의 요소에 접근, front(), back()
+#include <array>
+
+int main() {
+	array<int, 3> list{ 1, 2, 3 };
+
+	for (int i = 0; i < list.size(); ++i)
+		++list[i];
+
+	for (auto& elem : list)
+		cout << elem << " ";
+	cout << endl;
+
+	return 0;
+}
+*/
+
+/*
+// 학생을 나타내는 클래스 Student를 정의
+// 벡터를 이용하여 동적 객체 배영을 만든다. 사용자로부터 데이터(3명)을 입력받아서 배열에 저장한후
+// sort()함수를 사용하여 학점이 높은 순으로 모든 학생들을 나열하여라
+#include <vector>
+#include <string>
+#include <algorithm>
+
+class Student {
+	string name;
+	double marks;
+public :
+	Student(string n, double m) : name{ n }, marks{ m }{}
+	void print() {
+		cout << "이름 : " << name << endl;
+		cout << "학점 : " << marks << endl;
+	}
+	void set_name(string n) {
+		name = n;
+	}
+	string get_name() {
+		return name;
+	}
+	void set_marks(double m) {
+		marks = m;
+	}
+	double get_marks() {
+		return marks;
+	}
+};
+
+bool compare(Student& p, Student& q) {
+	return p.get_marks() > q.get_marks();
+}
+
+int main() {
+	vector<Student> list;
+	string name;
+	double marks;
+
+	for (int i = 0; i < 3; i++) {
+		cout << "이름은 ? ";
+		cin >> name;
+		cout << "학점은 ? ";
+		cin >> marks;
+		
+		list.push_back(Student(name, marks));
+	}
+	list[0].set_marks(4.5);
+	list.push_back(Student("Jung", 3.0));
+	sort(list.begin(), list.end(), compare);
+	for (auto& e : list) {
+		e.print();
+	}
+	return 0;
+}
+*/
+
+// 6강 포인터와 동적객체생성
+ 
+/*
+// 동적 메모리 할당 예제
+#include <time.h>
+
+int main() {
+	int* ptr;
+	srand(time(NULL));
+	ptr = new int[10];	// 동적 메모리 할당
+
+	for (int i = 0; i < 10; i++) {
+		ptr[i] = rand();
+	}
+
+	for (int i = 0; i < 10; i++) {
+		cout << ptr[i] << " ";
+	}
+
+	delete[] ptr;	// 동적 메모리 반납		
+	cout << endl;
+
+	return 0;
+}
+*/
+
+/*
+// 스마트 포인터( 자동으로 동적 메모리 삭제 )
+#include <memory>
+
+int main() {
+	unique_ptr<int> p(new int);
+	*p = 99;
+}
+*/
+
+/*
+// 스마트포인터로 배열 가리키기
+#include <memory>
+
+int main() {
+	unique_ptr<int[]>buf(new int[10]);
+
+	for (int i = 0; i < 10; i++)
+		buf[i] = i;
+
+	for (int i = 0; i < 10; i++)
+		cout << buf[i] << " ";
+
+	cout << endl;
+
+	return 0;
+}
+*/
+
+/*
+// 객체의 동적 생성
+class Dog {
+	string name;
+	int age;
+public :
+	Dog() {
+		cout << "생성자 호출\n";
+		age = 1;
+		name = "바둑이";
+	}
+
+	~Dog() {
+		cout << "소멸자 호출\n";
+	}
+};
+
+int main() {
+	Dog* pDog = new Dog;
+	delete pDog;
+
+	return 0;
+}
+*/
+
+/*
+// 포인터를 통하여 멤버 접근하기
+class Dog {
+	string name;
+	int age;
+public:
+	Dog() {
+		cout << "생성자 호출\n";
+		age = 1;
+		name = "바둑이";
+	}
+
+	~Dog() {
+		cout << "소멸자 호출\n";
+	}
+	
+	void setAge(int a) {
+		age = a;
+	}
+
+	int getAge() {
+		return age;
+	}
+};
+
+int main() {
+	Dog* pDog = new Dog;
+	cout << "강아지 나이 : " << pDog->getAge() << endl;
+
+	pDog->setAge(5);
+	cout << "강아지의 나이 : " << pDog->getAge() << endl;
+
+	delete pDog;
+
+	return 0;
+}
+*/
+
+/*
+// 멤버 동적 생성
+class Dog {
+	int* pWeight;
+	int* pAge;
+public :
+	Dog() {
+		pAge = new int(1);
+		pWeight = new int(10);
+	}
+
+	~Dog() {
+		delete pAge;
+		delete pWeight;
+	}
+
+	int getAge() {
+		return *pAge;
+	}
+	void setAge(int age) {
+		*pAge = age;
+	}
+	int getWeight() {
+		return *pWeight;
+	}
+	void setWeight(int weight) {
+		*pWeight = weight;
+	}
+};
+
+int main() {
+	Dog* pDog = new Dog;
+	cout << "강아지의 나이 : " << pDog->getAge() << endl;
+
+	pDog->setAge(5);
+	cout << "강아지의 나이 : " << pDog->getAge() << endl;
+
+	delete pDog;
+
+	return 0;
+}
+*/
+
+/*
+// 객체 포인터 선언 및 활용
+class Circle {
+	int radius;
+public :
+	Circle(int r = 1) {
+		radius = r;
+	}
+	double getArea();
+};
+
+double Circle::getArea() {
+	return 3.14 * radius * radius;
+}
+
+int main() {
+	Circle donut;
+	Circle pizza(30);
+
+	cout << donut.getArea() << endl;
+
+	Circle* p;
+	p = &donut;
+	cout << p->getArea() << endl;	// 더 자주 쓰임
+	cout << (*p).getArea() << endl;
+
+	p = &pizza;
+	cout << p->getArea() << endl;
+	cout << (*p).getArea() << endl;
+
+	return 0;
+}
+*/
+/*
+// new/delete의 사용
+int* pInt = new int;
+char* pChar = new char;
+Circle* pCicle = new Circle;
+delete pInt;
+delete pChar;
+delete pCircle;
+*/
+
+/*
+// 정수형 공간의 동적 할당 및 반환 예
+int main() {
+	int* p;
+
+	p = new int;
+	if (!p) {
+		cout << "메모리를 할당할 수 없습니다.";
+		return 0;
+	}
+
+	*p = 5;
+	int n = *p;
+	cout << "*p = " << *p << endl;
+	cout << "n = " << n << endl;
+
+	delete p;
+
+	return 0;
+}
+*/
+
+/*
+// 정수형 배열의 동적 할당 및 반환
+// 사용자로부터 입력할 정수의 개수를 입력 받아
+// 배열을 동적 할당 받고, 하나씩 정수를 입력 받은 후 합을 출력
+
+int main() {
+	cout << "입력할 정수의 개수는 ? ";
+	int n;
+	cin >> n;
+	if (n <= 0)
+		return 0;
+	int* p = new int[n];
+	if (!p) {
+		cout << "메모리를 할당할 수 없습니다.";
+		return 0;
+	}
+
+	for (int i = 0; i < n; i++) {
+		cout << i + 1 << "번째 정수 : ";
+		cin >> p[i];
+	}
+
+	int sum = 0;
+	for (int i = 0; i < n; i++) {
+		sum += p[i];
+	}
+	cout << "평균 = " << sum / n << endl;
+
+	delete[] p;
+}
+*/
+
+/*
+// Circle 객체의 동적 생성 및 반환
+class Circle {
+	int radius;
+public :
+	Circle(int r = 1) {
+		radius = r;
+		cout << "생성자 실행 radius = " << radius << endl;
+	}
+	~Circle() {
+		cout << "소멸자 실행 radius = " << radius << endl;
+	}
+	void setRadius(int r) {
+		radius = r;
+	}
+	double getArea() {
+		return 3.14 * radius * radius;
+	}
+};
+
+int main() {
+	Circle* p, * q;
+	p = new Circle();
+	q = new Circle(30);
+	cout << p->getArea() << endl << q->getArea() << endl;
+	delete p;
+	delete q;
+}
+*/
+
+/*
+// Circle 객체의 동적 생성과 반환 응용
+class Circle {
+	int radius;
+public:
+	Circle(int r = 1) {
+		radius = r;
+		cout << "생성자 실행 radius = " << radius << endl;
+	}
+	~Circle() {
+		cout << "소멸자 실행 radius = " << radius << endl;
+	}
+	void setRadius(int r) {
+		radius = r;
+	}
+	double getArea() {
+		return 3.14 * radius * radius;
+	}
+};
+
+int main() {
+	int radius;
+	while (true) {
+		cout << "정수 반지름 입력(음수이면 종료)>>";
+		cin >> radius;
+		if (radius < 0)
+			break;
+		Circle* p = new Circle(radius);	// 동적 객체 생성
+		cout << "원의 면적은 " << p->getArea() << endl;
+		delete p;
+	}
+}
+*/
+
+/*
+// Circle 배열의 동적 생성 및 반화
+class Circle {
+	int radius;
+public:
+	Circle(int r = 1) {
+		radius = r;
+		cout << "생성자 실행 radius = " << radius << endl;
+	}
+	~Circle() {
+		cout << "소멸자 실행 radius = " << radius << endl;
+	}
+	void setRadius(int r) {
+		radius = r;
+	}
+	double getArea() {
+		return 3.14 * radius * radius;
+	}
+};
+
+int main() {
+	Circle* pArray = new Circle[3];
+
+	pArray[0].setRadius(10);
+	pArray[1].setRadius(20);
+	pArray[2].setRadius(30);
+
+	for (int i = 0; i < 3; i++) {
+		cout << pArray[i].getArea() << endl;
+	}
+
+	Circle* p = pArray;
+	for (int i = 0; i < 3; i++) {
+		cout << p->getArea() << endl;
+		p++;
+	}
+
+	delete[] pArray;
+}
+*/
+
+/*
+// 객체 배열의 동적 생성과 반환 응용
+// 원의 개수를 입력 받고 Circle 배열을 동적 생성
+// 반지름 값을 입력 받아 Circle 배열에 저장하고
+// 면적이 100 ~ 200 사이인 원의 개수를 출력하라.
+class Circle {
+	int radius;
+public:
+	Circle(int r = 1) {
+		radius = r;
+		cout << "생성자 실행 radius = " << radius << endl;
+	}
+	~Circle() {
+		cout << "소멸자 실행 radius = " << radius << endl;
+	}
+	void setRadius(int r) {
+		radius = r;
+	}
+	double getArea() {
+		return 3.14 * radius * radius;
+	}
+};
+
+int main() {
+	cout << "생성하고자 하는 원의 개수 : ";
+	int n, radius;
+	cin >> n;
+
+	Circle* pArray = new Circle[n];
+	for (int i = 0; i < n; i++) {
+		cout << "원" << i + 1 << " : ";
+		cin >> radius;
+		pArray[i].setRadius(radius);
+	}
+
+	int count = 0;
+	Circle* p = pArray;
+	for (int i = 0; i < n; i++) {
+		cout << p->getArea() << " ";
+		if (p->getArea() >= 100 && p->getArea() <= 200)
+			count++;
+		p++;
+	}
+	cout << endl << "면적이 100에서 200 사이인 원의 갯수는 " << count << endl;
+
+	delete[] pArray;
+}
+*/
+
+/*
+// string 클래스를 이용한 문자열 생성 및 출력
+#include <string>
+
+int main() {
+	string str;
+	string address("전주시 덕진구 안덕원로 251");
+	string copyAddress(address);
+
+	char text[] = { 'L', 'o', 'v', 'e', ',', 'C', '+', '+', '\0'};
+	string title(text);
+
+	cout << str << endl;
+	cout << address << endl;
+	cout << copyAddress << endl;
+	cout << title << endl;
+	//cout << text << endl;
+}
+*/
+
+/*
+// string 배열 선언과 문자열 키 입력 응용
+// 5개의 string 배열을 선언하고 getline()을 이용하여 문자열을 입력 받아 사전 순으로 가장 뒤에 나오는 문자열을 출력
+#include <string>
+
+int main() {
+	string names[5];
+
+	for (int i = 0; i < 5; i++) {
+		cout << "이름 >> ";
+		getline(cin, names[i], '\n');
+	}
+
+	string latter = names[0];
+	for (int i = 1; i < 5; i++) {
+		if (latter < names[i]) {	// 사전 순으로 latter 문자열이 앞에 온다면
+			latter = names[i];
+		}
+	}
+	cout << "사전에서 가장 뒤에 나오는 문자열은 " << latter << endl;
+}
+*/
+
+/*
+// 문자열 입력 받고 회전시키기
+#include <string>
+
+int main() {
+	string s;
+
+	cout << "문자열을 입력하세요(한글 안됨) " << endl;
+	getline(cin, s, '\n');
+	int len = s.length();
+
+	for (int i = 0; i < len; i++) {
+		string first = s.substr(0, 1); // 맨 앞의 문자 1개를 문자열로 분리
+		string sub = s.substr(1, len - 1); // 나머지 문자들을 문자열로 분리
+		s = sub + first;
+		cout << s << endl;
+	}
+}
+*/
+
+/*
+// 덧셈 문자열을 입력 받아 덧셈 실행
+#include <string>
+
+int main() {
+	string s;
+	cout << "7+23+5+100+25와 같이 덧셈 문자열을 입력하세요." << endl;
+	getline(cin, s, '\n');
+	int sum = 0;
+	int startindex = 0;
+	while (true) {
+		int findex = s.find('+', startindex);
+		if (findex == -1) {	// 문자열을 찾을 수 없음
+			string part = s.substr(startindex);
+			if (part == "") break;	// +로 끝나는 경우
+			cout << part << endl;
+			sum += stoi(part);
+			break;
+		}
+		int count = findex - startindex;
+		string part = s.substr(startindex, count);
+		cout << part << endl;
+		sum += stoi(part);
+		startindex = findex + 1;
+	}
+	cout << "숫자들의 합은 " << sum;
+}
+*/
+
+/*
+// &가 입력될 때까지 여러 줄의 영문 문자열을 입력받고, 찾는 문자열과 대치할 문자열을 각각 입력 받아 문자열을 변경
+#include <string>
+
+int main() {
+	string s;
+	cout << "여러 줄의 문자열을 입력하세요. 입력의 끝은 &문자입니다." << endl;
+	getline(cin, s, '&');
+	cin.ignore();
+	string f, r;
+	cout << endl << "find : ";
+	getline(cin, f, '\n');
+	cout << "replace : ";
+	getline(cin, r, '\n');
+
+	int startIndex = 0;
+	while (true) {
+		int findex = s.find(f, startIndex);
+		if (findex == -1) break;
+		s.replace(findex, f.length(), r);
+		startIndex = findex + r.length();
+	}
+	cout << s << endl;
+}
+*/
