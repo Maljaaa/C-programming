@@ -1,9 +1,10 @@
 #define _CRT_SECURE_NO_WARNINGS	// strcpy쓰기 위해
 #include <iostream>
 #include <cstring>
+#include <string>
 using namespace std;
 
-// 1강
+// 1강 C++ 소개 --------------------------------------------------------------------------------------------------------------------
 /*
 // 현재 가진 돈으로 살 수 있는 캔디의 갯수와 남은 돈 계산
 int main() {
@@ -57,7 +58,7 @@ int main() {
 }
 */
 
-// 2강 제어구조와 배열 
+// 2강 제어구조와 배열 ------------------------------------------------------------------------------------------------------------
 /*
 * 참 거짓 판단
 int main() {
@@ -633,7 +634,7 @@ int main() {
 }
 */
 
-// 4강 클래스와 객체
+// 4강 클래스와 객체---------------------------------------------------------------------------------------------------------------
 
 /*
 // class ex
@@ -765,7 +766,7 @@ int main() {
 }
 */
 
-// 5강 생성자와 접근자 & 객체 배열
+// 5강 생성자와 접근자 & 객체 배열-------------------------------------------------------------------------------------------------
 /*
 // 생성자를 가진 Circle class
 class Circle {
@@ -1470,7 +1471,7 @@ int main() {
 }
 */
 
-// 6강 포인터와 동적객체생성
+// 6강 포인터와 동적객체생성-------------------------------------------------------------------------------------------------------
  
 /*
 // 동적 메모리 할당 예제
@@ -2042,7 +2043,7 @@ int main() {
 }
 */
 
-// 7강 복사생성자와 정적멤버
+// 7강 복사생성자와 정적멤버--------------------------------------------------------------------------------------------------
 
 /*
 // 객체 리턴 ex
@@ -2616,5 +2617,799 @@ int main() {
 	cout << "생존하고 있는 원의 개수 : " << Circle::getNumOfCircles() << endl;
 
 	return 0;
+}
+*/
+
+// 8강 연산자중복과 프렌드 함수 ---------------------------------------------------------------------------------------------------
+/*
+// 두 개의 Power 객체를 더하는 + 연산자 작성
+class Power {
+	int kick;
+	int punch;
+public:
+	Power(int kick = 0, int punch = 0) {
+		this->kick = kick;
+		this->punch = punch;
+	}
+	~Power() {}
+	void show();
+	Power operator+(Power op2); // 연산자 함수 선언
+};
+
+void Power::show() {
+	cout << "kick = " << kick << ", " << "punch = " << punch << endl;
+}
+
+Power Power::operator+(Power op2) {
+	Power tmp;
+	tmp.kick = this->kick + op2.kick;
+	tmp.punch = this->punch + op2.punch;
+	return tmp;
+}
+
+int main() {
+	Power a(3, 5), b(4, 6), c;
+	c = a + b;
+	a.show();
+	b.show();
+	c.show();
+
+	return 0;
+}
+*/
+
+/*
+// 두 개의 Power 객체를 비교하는 == 연산자 작성
+class Power {
+	int kick;
+	int punch;
+public:
+	Power(int kick = 0, int punch = 0) {
+		this->kick = kick;
+		this->punch = punch;
+	}
+	~Power() {}
+	void show();
+	bool operator == (Power op2);
+};
+
+void Power::show() {
+	cout << "kick = " << kick << ", " << "punch = " << punch << endl;
+}
+
+bool Power::operator==(Power op2) {
+	if (kick == op2.kick && punch == op2.punch)
+		return true;
+	else
+		return false;
+}
+
+int main() {
+	Power a(3, 5), b(3, 5);
+	a.show();
+	b.show();
+	if (a == b)
+		cout << "두 파워가 같다." << endl;
+	else
+		cout << "두 파워가 다르다." << endl;
+
+	return 0;
+}
+*/
+
+/*
+// 두 Power 객체를 더하는 += 연산자 작성
+class Power {
+	int kick;
+	int punch;
+public:
+	Power(int kick = 0, int punch = 0) {
+		this->kick = kick;
+		this->punch = punch;
+	}
+	~Power() {}
+	void show();
+	Power& operator+=(Power op2);
+};
+
+void Power::show() {
+	cout << "kick = " << kick << ", " << "punch = " << punch << endl;
+}
+
+Power& Power::operator+=(Power op2) {	// 타입이 참조 이므로
+	kick = kick + op2.kick;
+	punch = punch + op2.punch;
+	return *this;	// 리턴을 주소 값을 준다
+}
+
+int main() {
+	Power a(3, 5), b(4, 6), c;
+	a.show();
+	b.show();
+	c = a += b;
+	a.show();
+	c.show();
+
+	return 0;
+}
+*/
+
+/*
+// + 연산자 작성(실습) : b = a + 2
+class Power {
+	int kick;
+	int punch;
+public:
+	Power(int kick = 0, int punch = 0) {
+		this->kick = kick;
+		this->punch = punch;
+	}
+	~Power() {}
+	void show();
+	Power operator+(int op2);
+};
+
+void Power::show() {
+	cout << "kick = " << kick << ", " << "punch = " << punch << endl;
+}
+
+Power Power::operator+(int op2) {
+	Power tmp;
+	tmp.kick = kick + op2;
+	tmp.punch = punch + op2;
+	return tmp;
+}
+
+int main() {
+	Power a(3, 5), b;
+	a.show();
+	b.show();
+	b = a + 2;
+	a.show();
+	b.show();
+
+	return 0;
+}
+*/
+
+/*
+// operator + 예제
+class MyVector {
+	double x, y;
+public :
+	MyVector(double x = 0.0, double y = 0.0) : x{x}, y{y}{}
+	string to_String() {
+		return "(" + to_string(x) + ", " + to_string(y) + ")";
+	}
+	MyVector operator+(const MyVector& v2);
+};
+
+MyVector MyVector::operator+(const MyVector& v2) {
+	MyVector v;
+	v.x = this->x + v2.x;
+	v.y = this->y + v2.y;
+	return v;
+}
+
+int main() {
+	MyVector v1(1.0, 2.0), v2(3.0, 4.0);
+	MyVector v3 = v1 + v2;
+
+	cout << v1.to_String() << " + " << v2.to_String() << " = " << v3.to_String() << endl;
+
+	return 0;
+}
+*/
+
+/*
+// ==, != 연산자의 중복
+class Time {
+	int hour, min, sec;
+public :
+	Time(int h = 0, int m = 0, int s = 0) : hour{ h }, min{ m }, sec{ s }{}
+	bool operator==(Time& t2) {
+		return (hour == t2.hour && min == t2.min && sec == t2.sec);
+	}
+	bool operator != (Time& t2) {	// != 연산자
+		return !(*this == t2);
+	}
+};
+
+int main() {
+	Time t1(1, 2, 3), t2(1, 2, 3);
+
+	cout.setf(cout.boolalpha);
+	cout << (t1 == t2) << endl;
+	cout << (t1 != t2) << endl;
+	
+	return 0;
+}
+*/
+
+/*
+// 전위 ++ 연산자 작성
+class Power {
+	int kick;
+	int punch;
+public:
+	Power(int kick = 0, int punch = 0) {
+		this->kick = kick;
+		this->punch = punch;
+	}
+	~Power() {}
+	void show();
+	Power& operator++();
+};
+
+void Power::show() {
+	cout << "kick = " << kick << ", " << "punch = " << punch << endl;
+}
+
+Power& Power::operator++() {
+	kick++;
+	punch++;
+	return *this;
+}
+
+int main() {
+	Power a(3, 5), b;
+	a.show();
+	b.show();
+	b = ++a;
+	a.show();
+	b.show();
+
+	return 0;
+}
+*/
+
+/*
+// !연산자를 Power클래스의 멤버 함수로 작성
+// !a는 a의 kick, punch 파워가 모두 0이면 true, 아니면 false를 리턴한다.
+class Power {
+	int kick;
+	int punch;
+public:
+	Power(int kick = 0, int punch = 0) {
+		this->kick = kick;
+		this->punch = punch;
+	}
+	~Power() {}
+	void show();
+	bool operator!();
+};
+
+void Power::show() {
+	cout << "kick = " << kick << ", " << "punch = " << punch << endl;
+}
+
+bool Power::operator!() {
+	if (kick == 0 && punch == 0)
+		return true;
+	else
+		return false;
+}
+
+int main() {
+	Power a(0, 0), b(5, 5);
+	if (!a)
+		cout << "a의 파워가 0 이다" << endl;
+	else
+		cout << "a의 파워가 0이 아니다" << endl;
+	if (!b)
+		cout << "b의 파워가 0이다" << endl;
+	else
+		cout << "b의 파워가 0이 아니다" << endl;
+
+	return 0;
+}
+*/
+
+/*
+// ++ 연산자의 중복
+class Counter {
+	int value;
+public :
+	Counter() : value{ 0 } {  };
+	~Counter() {}
+	int getValue()const {
+		return value;
+	}
+	void setValue(int x) {
+		value = x;
+	}
+	Counter& operator++() {	// 전위 ++ 연산자
+		++value;
+		return *this;
+	}
+};
+
+int main() {
+	Counter c;
+	cout << "카운터의 값 : " << c.getValue() << endl;
+	++c;
+	cout << "카운터의 값 : " << c.getValue() << endl;
+
+	return 0;
+}
+*/
+
+/*
+// 후위 ++ 연산자 작성
+class Power {
+	int kick;
+	int punch;
+public:
+	Power(int kick = 0, int punch = 0) {
+		this->kick = kick;
+		this->punch = punch;
+	}
+	~Power() {}
+	void show();
+	Power operator++(int x);
+};
+
+void Power::show() {
+	cout << "kick = " << kick << ", " << "punch = " << punch << endl;
+}
+
+Power Power::operator++(int x) {
+	Power tmp = *this;
+	kick++;
+	punch++;
+	return tmp;
+}
+
+int main() {
+	Power a(3, 5), b;
+	a.show();
+	b.show();
+	b = a++;	// 넣고 증가
+	a.show();
+	b.show();
+
+	return 0;
+}
+*/
+
+/*
+// 참조를 리턴하는 << 연산자 작성
+// Power 객체의 kick과 punch에 정수를 더하는 << 연산자를 멤버 함수로 작성하라
+class Power {
+	int kick;
+	int punch;
+public:
+	Power(int kick = 0, int punch = 0) {
+		this->kick = kick;
+		this->punch = punch;
+	}
+	~Power() {}
+	void show();
+	Power& operator <<(int n);
+};
+
+void Power::show() {
+	cout << "kick = " << kick << ", " << "punch = " << punch << endl;
+}
+
+Power& Power::operator <<(int n) {
+	kick += n;
+	punch += n;
+	return *this;
+}
+
+int main() {
+	Power a(1, 2);
+	a << 3 << 5 << 6;
+	a.show();
+}
+*/
+
+/*
+// 대입 연산자 중복
+class Box {
+	double length, width, height;
+public :
+	Box(double l = 0.0, double w = 0.0, double h = 0.0) : length{ l }, width{ w }, height{ h }{}
+	void display() {
+		cout << "(" << length << ", " << width << ", " << height << ")" << endl;
+	}
+	Box& operator =(const Box& b2) {
+		this->length = b2.length;
+		this->width = b2.width;
+		this->height = b2.height;
+		return *this;
+	}
+ };
+
+int main() {
+	Box b1(30.0, 30.0, 60.0), b2;
+	b1.display();
+
+	b2 = b1;
+	b2.display();
+
+	return 0;
+}
+*/
+
+/*
+// 인덱스 연산자 []의 중복
+const int SIZE = 10;
+
+class MyArray {
+	int a[SIZE];
+public :
+	MyArray() {
+		for (int i = 0; i < SIZE; i++)
+			a[i] = 0;
+	}
+	int& operator[](int i) {
+		if (i >= SIZE) {
+			cout << "잘못된 인덱스 : ";
+			return a[0];
+		}
+		return a[i];
+	}
+};
+
+int main() {
+	MyArray A;
+
+	A[3] = 9;
+	cout << "A[3] = " << A[3] << endl;
+	cout << "A[16] = " << A[16] << endl;
+
+	return 0;
+}
+*/
+
+/*
+// 포인터 연산자의 중복
+class Pointer {
+	int* p;
+public :
+	Pointer(int*p):p{p}{}
+	~Pointer() { delete p; }
+	int* operator->()const {
+		return p;
+	}
+	int& operator*()const {	// 정수형 이기 때문에 *연산자만 테스트
+		return *p;
+	}
+};
+
+int main() {
+	Pointer p(new int);
+
+	*p = 100;
+	cout << *p << endl;
+	return 0;
+}
+*/
+
+/*
+// 프렌드 함수 만들기
+class Rect; // Rect 클래스가 선언되기 전에 먼저 참조되는 컴파일 오류를 막기 위한 선언문
+bool equals(Rect r, Rect s); // equals() 함수 선언
+class Rect {
+	int width, height;
+public :
+	Rect(int width, int height) {
+		this->width = width;
+		this->height = height;
+	}
+	friend bool equals(Rect r, Rect s);
+};
+
+bool equals(Rect r, Rect s) {
+	if (r.width == s.width && r.height == s.height)	// private 송성을 가진 변수에 접근 가능
+		return true;
+	else
+		return false;
+}
+
+int main() {
+	Rect a(3, 4), b(4, 5);
+	if (equals(a, b))
+		cout << "equal!" << endl;
+	else
+		cout << "Not equal!!" << endl;
+}
+*/
+
+/*
+// 다른 클래스의 멤버 함수를 프렌드로 선언
+class Rect;
+
+class RectManager {
+public :
+	bool equals(Rect r, Rect s);
+};
+
+class Rect {
+	int width, height;
+public :
+	Rect(int width, int height) {
+		this->width = width;
+		this->height = height;
+	}
+	friend bool RectManager::equals(Rect r, Rect s);
+};
+
+bool RectManager::equals(Rect r, Rect s) {
+	if (r.width == s.width && r.height == s.height)
+		return true;
+	else
+		return false;
+}
+
+int main() {
+	Rect a(3, 4), b(3, 4);
+	RectManager man;
+
+	if (man.equals(a, b))
+		cout << "Equal!!" << endl;
+	else
+		cout << "Not equal!" << endl;
+
+	return 0;
+}
+*/
+
+/*
+// 다른 클래스 전체를 프렌드로 선언
+class Rect;
+
+class RectManager {
+public:
+	bool equals(Rect r, Rect s);
+	void copy(Rect& dest, Rect& src);
+};
+
+class Rect {
+	int width, height;
+public:
+	Rect(int width, int height) {
+		this->width = width;
+		this->height = height;
+	}
+	friend RectManager;
+};
+
+bool RectManager::equals(Rect r, Rect s) {
+	if (r.width == s.width && r.height == s.height)
+		return true;
+	else
+		return false;
+}
+
+void RectManager::copy(Rect& dest, Rect& src) {
+	dest.width = src.width;
+	dest.height = src.height;
+}
+
+int main() {
+	Rect a(3, 4), b(5, 6);
+	RectManager man;
+
+	man.copy(b, a);
+	if (man.equals(a, b))
+		cout << "Equal!!" << endl;
+	else
+		cout << "Not equal!" << endl;
+
+	return 0;
+}
+*/
+
+/*
+// << 연산자의 중복 정의 - Ostream안의 멤버함수임 따라서 friend함수여야 중복 정의할 수 있음
+// friend ostream& operator<<(ostream& os, const MyVector& v) -> &는 <<연산자를 연속적으로 사용하기 위함
+class MyVector {
+	double x, y;
+public :
+	MyVector(double xvalue = 0.0, double yvalue = 0.0) : x{ xvalue }, y{ yvalue }{}
+	friend ostream& operator<<(ostream& os, const MyVector& v) {
+		os << "(" << v.x << ", " << v.y << ")" << endl;
+		return os;
+	}
+};
+
+int main() {
+	MyVector v1(1.0, 2.0), v2(3.0, 4.0), v3;
+	cout << v1 << v2 << v3;
+	return 0;
+}
+*/
+
+/*
+// 2+a를 위한 +연산자 함수를 프렌드로 작성
+class Power {
+	int kick;
+	int punch;
+public:
+	Power(int kick = 0, int punch = 0) {
+		this->kick = kick;
+		this->punch = punch;
+	}
+	~Power() {}
+	void show();
+	friend Power operator+(int op1, Power op2);
+};
+
+void Power::show() {
+	cout << "kick = " << kick << ", " << "punch = " << punch << endl;
+}
+
+Power operator+(int op1, Power op2) {
+	Power tmp;
+	tmp.kick = op1 + op2.kick;
+	tmp.punch = op1 + op2.punch;
+	return tmp;
+}
+
+int main() {
+	Power a(3, 5), b;
+	a.show();
+	b.show();
+	b = 2 + a;
+	a.show();
+	b.show();
+}
+*/
+
+/*
+// a + b를 위한 연산자 함수를 프렌드로 작성
+class Power {
+	int kick;
+	int punch;
+public:
+	Power(int kick = 0, int punch = 0) {
+		this->kick = kick;
+		this->punch = punch;
+	}
+	~Power() {}
+	void show();
+	friend Power operator+(Power op1, Power op2);
+};
+
+void Power::show() {
+	cout << "kick = " << kick << ", " << "punch = " << punch << endl;
+}
+
+Power operator+(Power op1, Power op2) {
+	Power tmp;
+	tmp.kick = op1.kick + op2.kick;
+	tmp.punch = op1.punch + op2.punch;
+	return tmp;
+}
+
+int main() {
+	Power a(3, 5), b(4, 6), c;
+	c = a + b;
+	a.show();
+	b.show();
+	c.show();
+}
+*/
+
+/*
+// ++ 연산자를 프렌드로 작성한 예
+class Power {
+	int kick;
+	int punch;
+public:
+	Power(int kick = 0, int punch = 0) {
+		this->kick = kick;
+		this->punch = punch;
+	}
+	~Power() {}
+	void show();
+	friend Power& operator++(Power& op);	// 전위++
+	friend Power operator++(Power& op, int x); // ++후위, int x 는 전위 연산자와 구분하기 위해 0의 의미없는 값을 넣는다.
+};
+
+void Power::show() {
+	cout << "kick = " << kick << ", " << "punch = " << punch << endl;
+}
+
+Power& operator++(Power& op) {
+	op.kick++;
+	op.punch++;
+	return op;
+}
+
+Power operator++(Power& op, int x) {
+	Power tmp = op;
+	op.kick++;
+	op.punch++;
+	return tmp;	// 변경 전의 op리턴
+}
+
+int main() {
+	Power a(3, 5), b;
+	b = ++a;
+	a.show();
+	b.show();
+	b = a++;
+	a.show();
+	b.show();
+}
+*/
+
+/*
+// 연산자 실습
+class Power {
+	int kick;
+	int punch;
+public:
+	Power(int kick = 0, int punch = 0) {
+		this->kick = kick;
+		this->punch = punch;
+	}
+	~Power() {}
+	void show();
+	Power& operator++();
+	Power& operator++(int a);
+	friend Power operator+(Power op1, Power op2);
+	bool operator==(Power op2);
+	friend ostream& operator<<(ostream& os, Power op2);
+};
+
+void Power::show() {
+	cout << "kick = " << kick << ", " << "punch = " << punch << endl;
+}
+
+Power& Power::operator++(){
+	kick++;
+	punch++;
+	return *this;
+}
+
+Power& Power::operator++(int a){
+	Power tmp = *this;
+	this->kick = kick;
+	this->punch = punch;
+	return tmp;
+}
+
+Power operator+(Power op1, Power op2){
+	Power tmp;
+	tmp.kick = op1.kick + op2.kick;
+	tmp.punch = op1.punch + op2.punch;
+	return tmp;
+}
+
+bool Power::operator==(Power op2){
+	return kick == op2.kick && punch == op2.punch;
+}
+
+// 왜 안되지?
+//bool Power::operator==(Power op2) {
+//	if (kick == op2.kick && punch == op2.punch)
+//		return true;
+//	else
+//		false;
+//}
+
+
+ostream& operator<<(ostream& os, Power op2) {
+	os << "[ " << op2.kick << ", " << op2.punch << " ]";
+	return os;
+}
+
+int main() {
+	Power a(3, 4), b(4, 6), c;
+	c = a++;
+	cout << a << ", " << b << ", " << c << endl;
+	c = ++b;
+	cout << a << ", " << b << ", " << c << endl;
+	c = a + b;
+	cout << c << endl;
+	if (a == b)
+		cout << "power 같다.";
+	else
+		cout << "power 같지 않다.";
 }
 */
