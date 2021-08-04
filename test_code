@@ -2446,7 +2446,7 @@ MyArray::~MyArray() {
 */
 
 /*
-// has-a 관계 
+// has-a 관계 (상속x)
 class Date {
 	int year, month, day;
 public :
@@ -3411,5 +3411,382 @@ int main() {
 		cout << "power 같다.";
 	else
 		cout << "power 같지 않다.";
+}
+*/
+
+// 9강 상속 --------------------------------------------------------------------------------------------------------------------------------------
+
+// 상속의 표현 -> 자식 클래스 : public 부모 클래스
+
+/*
+// Point 클래스를 상속받는 ColorPoint 클래스 만들기
+class Point {
+	int x, y;
+public :
+	void set(int x, int y) {
+		this->x = x;
+		this->y = y;
+	}
+	void showPoint() {
+		cout << "(" << x << ", " << y << ")" << endl;
+	}
+};
+
+class ColorPoint : public Point {
+	string color;
+public :
+	void setColor(string color) {
+		this->color = color;
+	}
+	void showColorPoint() {
+		cout << color << " : ";
+		showPoint();
+	}
+};
+
+int main() {
+	Point p;
+	ColorPoint cp;
+	cp.set(3, 4);
+	cp.setColor("red");
+	cp.showColorPoint();
+}
+*/
+
+/*
+// 상속 예제 (자동차 - 스포츠카)
+class Car {
+	int speed;
+public :
+	void setSpeed(int s) {
+		this -> speed = s;
+	}
+	int getSpeed() {
+		return speed;
+	}
+	void show() {
+		cout << "speed : " << speed << endl;
+	}
+};
+
+class SportsCar : public Car {
+	bool turbo;
+public :
+	void setTurbo(bool newValue) {
+		this->turbo = newValue;
+	}
+	bool getTurbo() {
+		return turbo;
+	}
+	void show2() {
+		show();
+		cout << "turbo : " << boolalpha << turbo << endl;
+	}
+};
+
+int main() {
+	SportsCar c;
+
+	c.setSpeed(60);
+	c.setTurbo(true);
+	c.show2();
+	c.setSpeed(100);
+	c.setTurbo(false);
+	c.show2();
+	return 0;
+}
+*/
+
+/*
+// 접근자 예제
+class Person {
+	string name;
+protected :	// 자식 클래스에서 접근 가능
+	string address;
+};
+
+class Student : Person {
+public :
+	void setAddress(string add) {
+		address = add;
+	}
+	string getAddress() {
+		return address;
+	}
+};
+
+int main() {
+	Student obj;
+
+	obj.setAddress("서울시 종로구 1번지");
+	cout << obj.getAddress() << endl;
+
+	return 0;
+}
+*/
+
+/*
+// 부모 클래스의 멤버함수 호출
+class ParentClass {
+public :
+	void print() {
+		cout << "부모 클래스의 print() 멤버 함수" << endl;
+	}
+};
+
+class ChildClass : public ParentClass {
+	int data;
+public :
+	void print() {	//  멤버함수 재정의 -> 같으니까
+		ParentClass::print();
+		cout << "자식 클래스의 print() 멤버 함수" << endl;
+	}
+};
+*/
+
+/*
+// Sprite - Alien - Player ex
+class Sprite {
+	int x, y;
+	string image;
+public :
+	Sprite(int x, int y, string image) :x{ x }, y{ y }, image{ image }{}
+	void draw();
+	void move();
+};
+
+class Alien : public Sprite {
+	int speed;
+public:
+	Alien(int x, int y, string image) : Sprite{x, y, image} {}
+	void move() {}
+};
+
+class Player : public Sprite {
+	string name;
+public :
+	Player(int x, int y, string image) : Sprite{ x, y, image } {}
+	void move();
+};
+
+int main() {
+	Alien(0, 100, "imagel.jpg");
+	Player p{ 0,100, "image1.jpg" };
+	return 0;
+}
+*/
+
+/*
+// 다중 상속 -> 하나의 자식 클래스가 두개 이상의 부모 클래스로부터 멤버를 상속받는 것을 의미
+// ex) class 자식 : 부모, 부모
+class PassangerCar {
+public :
+	int seats;
+	void set_seats(int n) {
+		seats = n;
+	}
+};
+
+class Truck {
+public :
+	int payload;
+	void set_payload(int load) {
+		payload = load;
+	}
+};
+
+class Pickup : public PassangerCar, public Truck {
+public :
+	int tow_capability;
+	void set_tow(int capa) {
+		tow_capability = capa;
+	}
+};
+
+int main() {
+	Pickup my_car;
+	my_car.set_seats(4);
+	my_car.set_payload(10000);
+	my_car.set_tow(30000);
+	return 0;
+}
+*/
+
+/*
+// 업 캐스팅 -> 사람을 동물로 보는 것 -> 자식 클래스가 부모 클래스에 들어가는 것
+// 다운 캐스팅 -> 부모 클래스가 자식클래스에 들어가는 것
+int main() {
+	ColorPoint cp;	// 객체생성
+	ColorPoint* pDer = &cp;	// 자식클래스 타입으로 cp처음 시작 주소값 가리킴
+	Point* pBase = pDer;	// 부모클래스 타입에 자식클래스 타입을 대입	// 업 캐스팅
+
+	pDer = (ColorPoint *)pBase; // 다운 캐스팅
+}
+*/
+
+/*
+// protected 멤버에 대한 접근
+class Point {
+protected :
+	int x, y;
+public :
+	void set(int x, int y);
+	void showPoint();
+};
+
+void Point::set(int x, int y) {
+	this->x = x;
+	this->y = y;
+}
+
+void Point::showPoint() {
+	cout << "(" << x << ", " << y << ")" << endl;
+}
+
+class ColorPoint : public Point {
+	string color;
+public :
+	void setColor(string color);
+	void showColorPoint();
+	bool equals(ColorPoint p);
+};
+
+void ColorPoint::setColor(string color) {
+	this->color = color;
+}
+
+void ColorPoint::showColorPoint() {
+	cout << color << ": ";
+	showPoint();
+}
+
+bool ColorPoint::equals(ColorPoint p) {
+	if (x == p.x && y == p.y && color == p.color)	// protected : 상속받은 클래스 사용 가능
+		return true;
+	else
+		return false;
+}
+
+int main() {
+	Point p;
+	p.set(2, 3);	// ok
+	//p.x = 5; // eroor
+	//p.y = 5; // error
+	p.showPoint();
+
+	ColorPoint cp;
+	//cp.x = 10; // error
+	//cp,y = 10; // error
+	cp.set(3, 4);
+	cp.setColor("red");
+	cp.showColorPoint();
+
+	ColorPoint cp2;
+	cp2. set(3, 4);
+	cp2.setColor("red");
+	cout << ((cp.equals(cp2)) ? "true" : "false");	// ok
+}
+*/
+
+/*
+// 다중 상속 선언 및 멤버 호출
+class MP3 {
+public :
+	void play();
+	void stop();
+};
+
+class MobilePhone {
+public :
+	bool sendCall();
+	bool receiveCall();
+	bool sendSMS();
+	bool receiveSMS();
+};
+
+class MusicPhone : public MP3, public MobilePhone {	// 다중 상속 선언
+public :
+	void dial();
+};
+
+void MusicPhone::dial() {	// 다중 상속 활용
+	play();
+	sendCall();
+}
+
+int main() {	// 다중 상속 활용
+	MusicPhone hanPhone;
+	hanPhone.play();
+	hanPhone.sendSMS();
+}
+*/
+
+/*
+// Adder와 Subtractor를 다중 상속 받는 Calculator 클래스 작성
+class Adder {
+protected :
+	int add(int a, int b) {
+		return a + b;
+	}
+};
+
+class Subtractor {
+protected :
+	int minus(int a, int b) {
+		return a - b;
+	}
+};
+
+class Calculator : public Adder, public Subtractor {
+public :
+	int calc(char op, int a, int b);
+};
+
+int Calculator::calc(char op, int a, int b) {
+	int res = 0;
+	switch (op) {
+	case '+': res = add(a, b); break;
+	case '-': res = minus(a, b); break;
+	}
+	return res;
+}
+
+int main() {
+	Calculator handCaculator;
+	cout << "2 + 4 = " << handCaculator.calc('+', 2, 4) << endl;
+	cout << "100 - 8 = " << handCaculator.calc('-', 100, 8) << endl;
+	return 0;
+}
+*/
+
+/*
+// 가상 상속 virtual로 다중 상속의 모호성 해결 ( 컴파일x   런타임에서 확인 )  
+class BaseIO {
+public :
+	int mode;
+};
+
+class In : virtual public BaseIO {
+public : 
+	int readPos;
+};
+
+class Out : virtual public BaseIO {
+public :
+	int writePos;
+};
+
+class InOut : public In, public Out {
+public :
+	bool safe;
+};
+
+int main() {
+	InOut ioObj;
+
+	ioObj.readPos = 10;
+	ioObj.writePos = 20;
+	ioObj.safe = true;
+	ioObj.mode = 5;			// 모호성 해결
 }
 */
