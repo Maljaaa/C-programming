@@ -3790,3 +3790,472 @@ int main() {
 	ioObj.mode = 5;			// 모호성 해결
 }
 */
+
+/*
+// 상속 실습 1
+class TV {
+	int size;
+public :
+	TV() {
+		size = 20;
+	}
+	TV(int size) {
+		this->size = size;
+	}
+	int getSize() {
+		return size;
+	}
+};
+
+class WideTV : public TV {
+	bool videoIn;
+public :
+	WideTV(int size, bool videoIn) :TV(size) {	// 부모 클래스에 있는 생성자 호출, 없으면 부모 클래스 기본 생성자 호출됨
+		this->videoIn = videoIn;
+	}
+	bool getVideoIn() {
+		return videoIn;
+	}
+};
+
+class SmartTV : public WideTV {
+	string ipAddr;
+public :
+	SmartTV(string ipAddr, int size) : WideTV(size, true) {
+		this->ipAddr = ipAddr;
+	}
+	string getIp() {
+		return ipAddr;
+	}
+};
+
+int main() {
+	SmartTV tv("192.0.0.1", 32);
+	cout << "size = " << tv.getSize() << endl;
+	cout << "videoin = " << boolalpha << tv.getVideoIn() << endl;
+	cout << "ip = " << tv.getIp() << endl;
+}
+*/
+
+/*
+// 상속 실습 2
+class Shape {
+	int x, y;
+public :
+	Shape(int x = 0, int y = 0) : x{ x }, y{ y }{}
+	void setX(int x) {
+		this->x = x;
+	}
+	void setY(int y) {
+		this->y = y;
+	}
+	int getX() {
+		return x;
+	}
+	int getY() {
+		return y;
+	}
+	void draw() {
+		cout << "Sahpe drawing ......" << endl;
+	}
+	int getArea() {
+		return 0;
+	}
+};
+
+class Circle : public Shape {
+	int r;
+public :
+	Circle(int r, int x, int y) : Shape(x, y), r{r}{}
+	void draw() {
+		cout << "Circle drawing ......" << endl;
+	}
+	double getArea() {	// 재정의? 중복정의? -> 재정의!! Overriding
+		return 3.14 * r* r;
+	}
+};
+
+class Rect : public Shape {
+	int w, h;
+public :
+	Rect(int x, int y, int w, int h) : Shape(x, y), w{ w }, h{ h }{}
+	void draw() {
+		cout << "Rectangle drawing ....." << endl;
+	}
+	int getArea() {
+		return w * h;
+	}
+};
+
+int main() {
+	Circle c(10, 1, 1);
+	Rect r(1, 1, 10, 20);
+	c.draw();
+	r.draw();
+	cout << c.getArea() << endl;
+	cout << r.getArea() << endl;
+}
+*/
+
+// 10강 다형성 -------------------------------------------------------------------------------------------------
+/*
+// 파생 클래스에서 함수를 재정의 하는 사례
+class Base {
+public :
+	void f() {
+		cout << "Base::f() called" << endl;
+	}
+};
+
+class Derived : public Base {
+public :
+	void f() {
+		cout << "Derived::f() called" << endl;
+	}
+};
+
+void main() {
+	Derived d, * pDer;
+	pDer = &d;
+	pDer->f();	// Derived::f() 호출
+
+	Base* pBase;
+	pBase = pDer;	// 업캐스팅
+	pBase->f();	//Base::f() 호출
+}
+*/
+
+/*
+// 함수 재정의와 오버라이딩 사례 비교
+// Redefine
+class Base {
+public :
+	void f() {
+		cout << "Base::f() called" << endl;
+	}
+};
+
+class Derived : public Base {
+public :
+	void f() {
+		cout << "Derived::f() called" << endl;
+	}
+};
+
+// overriding
+class Base {
+public:
+	virtual void f() {
+		cout << "Base::f() called" << endl;
+	}
+};
+
+class Derived : public Base {
+public:
+	virtual void f() {
+		cout << "Derived::f() called" << endl;
+	}
+};
+*/
+
+/*
+// 오버라이딩과 가상 함수 호출
+class Base {
+public:
+	virtual void f() {
+		cout << "Base::f() called" << endl;
+	}
+};
+
+class Derived : public Base {
+public:
+	virtual void f() {
+		cout << "Derived::f() called" << endl;
+	}
+};
+
+int main() {
+	Derived d, * pDer;
+	pDer = &d;
+	pDer->f();	// Derived::f() 호출
+
+	Base* pBase;
+	pBase = pDer;	// upcasting
+	pBase->f();	// 동적바인딩 발생 Derived::f() 실행
+}
+*/
+
+/*
+// Pure virtual function Ex
+class Date {
+protected :
+	int year, month, day;
+public :
+	Date(int y, int m, int d) : year{ y }, month{ m }, day{ d }{}
+	virtual void print() = 0;	// pure virtual function
+};
+
+class Adate : public Date {
+public :
+	Adate(int y, int m, int d) : Date(y, m, d) {}
+	void print() {
+		cout << year << "." << month << "." << day << ".\n";
+	}
+};
+
+class Bdate : public Date {
+public :
+	Bdate(int y, int m, int d) : Date(y, m, d) {}
+	void print();
+};
+
+void Bdate::print() {
+	static const char* mn[] = { "Jan", "Feb", "Mar", "Apr" };
+	cout << mn[month - 1] << " " << day << ' ' << year << endl;
+}
+
+int main() {
+	Adate a(1999, 1, 26);
+	Bdate b(2000, 2, 13);
+	Date& r1 = a, & r2 = b;
+	r1.print();
+	r2.print();
+	return 0;
+}
+*/
+
+/*
+// 추상 클래스 구현 연습
+class Calculator {
+public :
+	virtual int add(int a, int b) = 0;
+	virtual int substract(int a, int b) = 0;
+	virtual double average(int a[], int size) = 0;
+};
+
+class GoodCalc : public Calculator {
+	int add(int a, int b) {
+		return a + b;
+	}
+	int substract(int a, int b) {
+		return a - b;
+	}
+
+	double average(int a[], int size) {
+		double sum = 0;
+		for (int i = 0; i < size; i++) {
+			sum += a[i];
+		}
+		return sum / size;
+	}
+};
+
+int main() {
+	int a[] = { 1, 2, 3, 4, 5 };
+	Calculator* p = new GoodCalc;
+	cout << p->add(2, 3) << endl;
+	cout << p->substract(2, 3) << endl;
+	cout << p->average(a, 5) << endl;
+	delete p;
+}
+*/
+
+/*
+// 추상 클래스를 상속받는 파생 클래스 구현 연습
+class Calculator {
+	void input() {
+		cout << "정수 2개를 입력하세요 : ";
+		cin >> a >> b;
+	}
+protected:
+	int a, b;
+	virtual int calc(int a, int b) = 0;
+public :
+	void run() {
+		input();
+		cout << "계산된 값은 " << calc(a, b) << endl;
+	}
+};
+
+class Adder : public Calculator {
+protected :
+	int calc(int a, int b) {
+		return a + b;
+	}
+};
+
+class Subtractor : public Calculator {
+protected :
+	int calc(int a, int b) {
+		return a - b;
+	}
+};
+
+int main() {
+	Adder adder;
+	Subtractor subtractor;
+	adder.run();
+	subtractor.run();
+}
+*/
+
+/*
+// Virtual 소멸자 필요성 예 - run 안됨
+class AAA {
+	char* str1;
+public :
+	AAA(char* _str1) {
+		str1 = new char[strlen(_str1) + 1];
+		strcpy(str1, _str1);
+	}
+	virtual ~AAA() {
+		cout << "~AAA() call!!" << endl;
+		delete[] str1;
+	}
+	virtual void ShowString() {
+		cout << str1 << " ";
+	}
+};
+
+class BBB : public AAA {
+	char* str2;
+public :
+	BBB(char* _str1, char* _str2) : AAA(_str1) {
+		str2 = new char[strlen(_str2) + 1];
+		strcpy(str2, _str2);
+	}
+	~BBB() {
+		cout << "~BBB() call!!" << endl;
+		delete[] str2;
+	}
+	virtual void ShowString() {
+		AAA::ShowString();
+		cout << str2 << endl;
+	}
+};
+
+int main() {
+	AAA* a = new BBB("Good", "evening");
+	BBB* b = new BBB("Good", "morning");
+	a->ShowString();
+	b->ShowString();
+	cout << "-----객체 소멸 직전-----" << endl;
+	delete a;
+	delete b;
+	return 0;
+}
+*/
+
+/*
+// 소멸자 문제 예제 - error
+class String {
+	char* s;
+public :
+	String(char* p) {
+		cout << "String() 생성자" << endl;
+		s = new char[strlen(p) + 1];
+		strcpy(s, p);
+	}
+	virtual ~String() {
+		cout << "String() 소멸자" << endl;
+		delete[] s;
+	}
+	virtual void display() {
+		cout << s;
+	}
+};
+
+class MyString : public String {
+	char* header;
+public :
+	MyString(char* h, char* p) : String(p) {
+		cout << "MyString() 생성자" << endl;
+		header = new char[strlen(h) + 1];
+		strcpy(header, h);
+	}
+	~MyString() {
+		cout << "MyString() 소멸자" << endl;
+		delete[] header;
+	}
+	void display() {
+		cout << header;
+		String::display();
+		cout << header << endl;
+	}
+};
+
+int main() {
+	String* p = new MyString("---", "Hello World!");
+	p->display();
+	delete p;
+
+	return 0;
+}
+*/
+
+/*
+// 다형성 실습
+class Converter {	// 추상 클래스 포인터는 만들 수 있다 But 객체 생성 불가능
+protected :
+	double ratio;
+	virtual double convert(double src) = 0;
+	virtual string getSourceString() = 0;
+	virtual string getDestString() = 0;
+public :
+	Converter(double ratio) {
+		this->ratio = ratio;
+	}
+	void run() {
+		double src;
+		cout << getSourceString() << "을 " << getDestString() << "로 바꿉니다." << endl;
+		cout << getSourceString() << "을 입력하세요 : ";
+		cin >> src;
+		cout << "변환결과 : " << convert(src) << getDestString() << endl;
+	}
+};
+
+class WonToDollar : public Converter {
+protected:
+	virtual double convert(double src) {
+		return src / ratio;
+	}
+	virtual string getSourceString() {
+		return "원";
+	}
+	virtual string getDestString() {
+		return "달러";
+	}
+public :
+	WonToDollar(double ratio) : Converter(ratio) {	}
+};
+
+class KmToMile : public Converter {
+protected:
+	virtual double convert(double src) {
+		return src / ratio;
+	}
+	virtual string getSourceString() {
+		return "Km";
+	}
+	virtual string getDestString() {
+		return "Mile";
+	}
+public :
+	KmToMile(double ratio) : Converter(ratio) {}
+};
+
+int main() {
+	WonToDollar wd(1010);
+	KmToMile toMile(1.6039344);
+	//wd.run();
+	//toMile.run();
+
+	Converter* p;
+	p = &wd;
+	p->run();
+	p = &toMile;
+	p->run();
+}
+*/
+
+// 11강 예외처리와 템플릿 ----------------------------------------------------------------------------------------
