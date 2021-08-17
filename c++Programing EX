@@ -4,6 +4,7 @@
 #include <string>
 #include <fstream>
 #include <vector>
+#include <conio.h>
 using namespace std;
 
 // 1강 C++ 소개 --------------------------------------------------------------------------------------------------------------------
@@ -4891,6 +4892,483 @@ int main() {
 		count++;
 	}
 	cout << "읽은 바이트 수는 " << count << endl;
+	fin.close();
+}
+*/
+
+/*
+// 멤버함수를 이용한 파일 입출력
+int main() {
+	ifstream is{ "scores.txt" };
+	if (!is) {
+		cerr << "파일 오픈에 실패했습니다." << endl;
+		exit(1);
+	}
+	char c;
+	is.get(c);
+	while (!is.eof()) {	// c를 쓰고 get해야 한다! 그래야 eof읽고 표현하는 일이 없음.
+		cout << c;
+		is.get(c);
+	}
+	cout << endl;
+	return 0;
+}
+*/
+
+/*
+// 줄마다 숫자 적어서 출력
+int main() {
+	ifstream is{"scores.txt"};
+	ofstream os{ "result.txt" };
+	if (is.fail()) {
+		cerr << "파일 오픈 실패" << endl;
+		exit(1);
+	}
+	if (os.fail()) {
+		cerr << "파일 오픈 실패" << endl;
+		exit(1);
+	}
+	char c;
+	int line_number = 1;
+	is.get(c);
+	os << line_number << " : ";
+	while (!is.eof()) {
+		os << c;
+		if (c == '\n') {
+			line_number++;
+			os << line_number << " : ";
+		}
+		is.get(c);
+	}
+	return 0;
+}
+*/
+
+/*
+// 텍스트 파일 연결 - 실행 안됨
+int main() {
+	const char* firstFile = "C:\\Users\\신승민\\Desktop\\c++ programing\\project1\\project1\\temp.txt";
+	const char* secondFile = "C:\\Users\\신승민\\Desktop\\c++ programing\\project1\\project1\\score.txt";
+
+	fstream fout(firstFile, ios::out | ios::app);
+	if (!fout) {
+		cout << firstFile << "열기 오류";
+		return 0;
+	}
+
+	fstream fin(secondFile, ios::in);
+	if (!fin) {
+		cout << secondFile << "열기 오류";
+		return 0;
+	}
+
+	int c;
+	while ((c = fin.get()) != EOF) {
+		fout.put(c);
+	}
+	fin.close();	// 입력 파일 닫기
+	fout.close();	// 출력 파일 닫기
+}
+*/
+
+/*
+// getline() ex
+int main() {
+	string address;
+	cout << "주소를 입력하세요 : ";
+	getline(cin, address);	// 스트림에서 한줄을 읽을 때
+	cout << "안녕 ! " << address << "에 사시는 분" <<  endl;
+
+	return 0;
+}
+*/
+
+/*
+// istream의 getline() 함수를 이용하여 출력
+int main() {
+	ifstream fin{ "numbers.txt" };
+	if (!fin) {
+		cout << "numbers.txt 열기 실패" << endl;
+		return 0;
+	}
+	char buf[81];	// 한 라인이 최대 80개의 문자로 구성된다고 가정
+	while (fin.getline(buf, 81)) {
+		cout << buf << endl;
+	}
+	fin.close();
+}
+*/
+
+/*
+// getline(ifstream&, string&)으로 words.txt파일을 읽고 단어 검색
+void fileRead(vector<string>& v, ifstream& fin) {
+	string line;
+	while (getline(fin, line)) {
+		v.push_back(line);	// 읽은 라인을 벡터에 저장
+	}
+}
+
+void search(vector<string>& v, string word) {
+	for (int i = 0; i < v.size(); i++) {
+		int index = v[i].find(word);
+		if (index != -1)	//found
+			cout << v[i] << endl;
+	}
+}
+
+int main() {
+	vector<string> wordVector;
+	ifstream fin("words.txt");
+	if (!fin) {
+		cout << "words.txt 파일을 열 수 없습니다." << endl;
+		return 0;
+	}
+	fileRead(wordVector, fin);
+	fin.close();
+
+	cout << "words.txt 파일을 읽었습니다." << endl;
+	while (true) {
+		cout << "검색할 단어를 입력하세요 : ";
+		string word;
+		getline(cin, word);
+		if (word == "exit") {
+			break;
+		}
+		search(wordVector, word);
+	}
+	cout << "프로그램을 종료합니다." << endl;
+}
+*/
+
+/*
+// 이진 파일 쓰기 예제
+int main() {
+	int buffer[] = { 10, 20, 30, 40, 50 };
+	ofstream os{ "test.txt", ofstream::binary };
+	if (!os) {
+		cout << "test.txt 파일을 열 수 없습니다." << endl;
+		exit(1);
+	}
+	os.write((char*)&buffer, sizeof(buffer));
+	return 0;
+}
+*/
+
+/*
+// 이진 파일 읽기 예제
+int main() {
+	int buffer[5];
+	ifstream is{ "test.txt", ifstream::binary };
+	if (!is) {
+		cout << "test.txt 파일을 열 수 없습니다." << endl;
+		exit(1);
+	}
+	is.read((char*)&buffer, sizeof(buffer));
+	for (auto& e : buffer)
+		cout << e << " ";
+	return 0;
+}
+*/
+
+/*
+// 이미지 복사 프로그램
+int main() {
+	string ifile, ofile;
+	cout << "원본 파일 이름 : ";
+	cin >> ifile;
+	cout << "복사 파일 이름 : ";
+	cin >> ofile;
+	ifstream source(ifile, ios::binary);
+	ofstream dest(ofile, ios::binary);
+	if (source.is_open() && dest.is_open()) {
+		while (!source.eof()) {
+			dest.put(source.get());
+		}
+		// while문을 dest << source.rdbuf();
+		// rdbuf()는 istream객체가 사용하는 버퍼객체의 포인터를 반환. 
+		// 이것을 << 연산자를 이용하여 ostream으로 연결하면 문장 하나로 파일의 전체 내용을 복사 할 수 있다.
+	}
+	return 0;
+}
+*/
+
+/*
+// get(), put()으로 바이너리 I/O로 파일 복사
+int main() {
+	// 소스 파일과 목적 파일의 이름
+	const char* srcFile = "C:\\Users\\신승민\\Desktop\\c++ programing\\project1\\project1\\pretty.jpg";
+	const char* destFile = "C:\\Users\\신승민\\Desktop\\c++ programing\\project1\\project1\\pretty_copy.jpg";
+
+	// 소스 파일 열기
+	ifstream fsrc(srcFile, ios::in | ios::binary);
+	if (!fsrc) {
+		cout << srcFile << "열기 오류" << endl;
+		return 0;
+	}
+
+	// 목적 파일 열기
+	ofstream fdest(destFile, ios::out | ios::binary);
+	if (!fdest) {
+		cout << destFile << "열기 오류" << endl;
+		return 0;
+	}
+
+	// 소스 to 목적 파일로 복사
+	int c;
+	while ((c = fsrc.get()) != EOF) {
+		fdest.put(c);
+	}
+	cout << srcFile << "을 " << destFile << "로 복사 완료" << endl;
+	fsrc.close();
+	fdest.close();
+}
+*/
+
+/*
+// read()로 텍스트 파일을 바이너리 I/O로 읽기
+int main() {
+	const char* file = "C:\\Windows\\system.ini";
+
+	ifstream fin;
+	fin.open(file, ios::in | ios::binary);
+	if (!fin) {
+		cout << "열기 오류" << endl;
+		return 0;
+	}
+
+	int count = 0;
+	char s[32];
+	while (!fin.eof()) {
+		fin.read(s, 32);
+		int n = fin.gcount();
+		cout.write(s, n);
+		count += n;
+	}
+
+	cout << "읽은 바이트 수는 " << count << endl;
+	fin.close();
+}
+*/
+
+/*
+// read(), write()로 이미지 파일 복사
+int main() {
+	// 소스 파일과 목적 파일의 이름
+	const char* srcFile = "C:\\Users\\신승민\\Desktop\\c++ programing\\project1\\project1\\pretty.jpg";
+	const char* destFile = "C:\\Users\\신승민\\Desktop\\c++ programing\\project1\\project1\\pretty_copy.jpg";
+
+	// 소스 파일 열기
+	ifstream fsrc(srcFile, ios::in | ios::binary);
+	if (!fsrc) {
+		cout << srcFile << "열기 오류" << endl;
+		return 0;
+	}
+
+	// 목적 파일 열기
+	ofstream fdest(destFile, ios::out | ios::binary);
+	if (!fdest) {
+		cout << destFile << "열기 오류" << endl;
+		return 0;
+	}
+
+	// 소스 to 목적 파일로 복사
+	char buf[1024];
+	int count = 0;
+	while (!fsrc.eof()) {
+		fsrc.read(buf, 1024);
+		int n = fsrc.gcount();
+		fdest.write(buf, n);
+		count += n;
+	}
+
+	cout << srcFile << "을 " << destFile << "로 복사 완료" << endl;
+	cout << "읽은 바이트 수는 " << count << endl;
+	fsrc.close();
+	fdest.close();
+}
+*/
+
+/*
+// int 배열과 double 값을 바이너리 파일에 저장하고 읽기
+int main() {
+	const char* file = "C:\\Users\\신승민\\Desktop\\VPN\\vpngate-client-2018.08.27-build-9668.142160\\VPNGate.dat";
+
+	ofstream fout;
+	fout.open(file, ios::out | ios::binary);	// 쓰기 모드로 파일 열기
+	if (!fout) {
+		cout << "파일 열기 오류";
+		return 0;
+	}
+
+	int n[] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+	double d = 3.15;
+	fout.write((char*)&n, sizeof(n));
+	fout.write((char*)&d, sizeof(d));
+	fout.close();
+
+	// 임의로 바꿈
+	for (int i = 0; i < 10; i++)
+		n[i] = 99;
+	
+	d = 8.15;
+
+	ifstream fin(file, ios::in | ios::binary);	
+	if (!fin) {
+		cout << "열기 오류";
+		return 0;
+	}
+
+	fin.read((char*)&n, sizeof(n));
+	fin.read((char*)&d, sizeof(d));
+
+	for (int i = 0; i < 10; i++)
+		cout << n[i] << " ";
+	cout << endl << d << endl;
+	fin.close();
+}
+*/
+
+/*
+// 파일 크기 알아내기
+long getFileSize(ifstream& fin) {
+	fin.seekg(0, ios::end);
+	long length = fin.tellg();
+	return length;
+}
+
+int main() {
+	const char* file = "C:\\Windows\\system.ini";
+
+	ifstream fin(file);
+	if (!fin) {
+		cout << "열기 오류";
+		return 0;
+	}
+	cout << file << "의 크기는 " << getFileSize(fin);
+	fin.close();
+}
+*/
+
+/*
+// 10개의 난수를 저장한 이진 파일을 만들고 파일의 크기를 알아낸 후, 파일의 중간으로 파일 위치 표시자를 이동시켜서 그 위치에 있는 난수를 읽어오는 프로그램
+const int SIZE = 10;
+
+int main() {
+	int data;
+
+	ofstream os{ "test.dat", ofstream::binary };
+	if (os.fail()) {
+		cout << "파일을 열 수 없습니다." << endl;
+		exit(1);
+	}
+
+	for (int i = 0; i < SIZE; i++) {
+		data = rand();
+		cout << data << " ";
+		os.write((char*)&data, sizeof(data));
+	}
+	os.close();
+
+	ifstream is("test.dat", ifstream::binary);
+	if (is.fail()) {
+		cout << "파일을 열 수 없습니다." << endl;
+		exit(1);
+	}
+
+	// 파일 크기 알아내기
+	is.seekg(0, ios::end);
+	long size = is.tellg();
+	cout << endl << "파일 크기는 " << size << endl;
+
+	// 파일 중심으로
+	is.seekg(size / 2, ios::beg);
+	is.read((char*)&data, sizeof(data));
+	cout << "중앙 위치의 값은 " << data << endl;
+	return 0;
+}
+*/
+
+/*
+// 행맨 업그레이드 버전 - 단어시험용으로 좋은듯!!
+int main() {
+	vector<string>words;
+	ifstream infile("words.txt");
+
+	while (infile) {
+		string word;
+		infile >> word;	// infile에서 한 단어를 읽어옴
+		words.push_back(word);	// vector에 푸쉬백
+	}
+
+	while (true) {
+		string r = words[rand() % words.size()];
+		cout << "이번에 선택된 단어는 " << r << endl;
+		_getch();	// enter키로 한 단어씩 보여주라는 메소드
+	}
+	return 0;
+}
+*/
+
+/*
+// 파일 입출력 실습	1
+int main() {
+	ofstream os{ "data.txt" };
+	for (int i = 0; i < 10; i++) {
+		os << i << " ";
+	}
+	os.close();
+
+	ifstream is{ "data.txt" };
+	for (int i = 0; i < 10; i++) {
+		is >> i;
+		cout << i << " ";
+	}
+}
+*/
+
+/*
+// 파일 입출력 실습 2
+int main() {
+	ifstream fsrc{ "SAP Jargon.jpg", ios::in | ios::binary };
+	ofstream dest{ "SAP Jargon_copy.jpg", ios::out | ios::binary };
+
+	char buffer[1024];
+	int n, fsize = 0;
+
+	while (!fsrc.eof()) {
+		fsrc.read(buffer, 1024);
+		n = fsrc.gcount();
+		dest.write(buffer, n);
+		fsize += n;
+	}
+
+	cout << fsize << endl;
+}
+*/
+
+/*
+// 파일 입출력 실습2
+int main() {
+	ofstream fout{ "input.txt", ios::out | ios::binary };
+	int a[] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+	fout.write((char*)a, sizeof(a));
+	fout.close();
+;
+	for (int i = 0; i < 10; i++)
+	a[i] = 99;
+
+	ifstream fin{ "input.txt", ios::in | ios::binary };
+	fin.read((char*)a, sizeof(a));
+	for(int i = 0; i < 10; i++){
+		cout << a[i] << " ";
+	}
+	cout << endl;
+	fin.seekg(0, ios::end);
+	cout << fin.tellg() << endl;
+	fin.seekg(-4, ios::end);	// -1이면 쓰레기 값이 나옴 - int형은 4바이트씩 떨어져있기 때문
+	int c;
+	fin.read((char*)&c, sizeof(c));
+	cout << c << endl;
 	fin.close();
 }
 */
